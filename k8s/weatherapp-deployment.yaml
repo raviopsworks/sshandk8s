@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherapp-deployment
+  labels:
+    app: weatherapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: weatherapp
+  template:
+    metadata:
+      labels:
+        app: weatherapp
+    spec:
+      containers:
+      - name: weatherapp
+        image: weatherapp:1.0.0
+        env:
+          - name: APP_PORT
+            value: 80
+          - name: APPID
+            valueFrom:
+            secretKeyRef:
+              name: appidsecret
+              key: APPID
+        ports:
+        - containerPort: 80
+      livenessProbe:
+        httpGet:
+          path: /minneapolis
+          port: 80
+        initialDelaySeconds: 6
+        periodSeconds: 6
+      readinessProbe:
+        tcpSocket:
+          port: 80
+        initialDelaySeconds: 6
+        periodSeconds: 6
+        

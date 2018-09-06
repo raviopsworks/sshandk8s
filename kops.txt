@@ -1,0 +1,13 @@
+kops create cluster \
+  --name=kops.test.com \
+  --state=s3://kops.test.com \
+  --authorization RBAC \
+  --zones=eu-central-1a \
+  --node-count=20 \
+  --node-size=t2.micro \
+  --master-size=t2.micro \
+  --master-count=1 \
+  --dns-zone=kops.test.com \
+  --out=terraform \
+  --target=terraform \
+  --ssh-public-key=/root/.ssh/id_rsa.pub
