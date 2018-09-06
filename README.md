@@ -1,6 +1,6 @@
 # ssh-cookbook
 
-TODO: Enter the cookbook description here.
+ssh-cookbook to add ssh keys for a user in dev environment using roles and data_bags
 
 berks install
 berks upload
